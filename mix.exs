@@ -46,7 +46,7 @@ defmodule Contentful.Mixfile do
       {:httpoison, "~> 0.13"},
       {:poison, "~> 4.0"},
       {:exvcr, "~> 0.10", only: :test},
-      {:dogma, "~> 0.1", only: :dev}
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 
