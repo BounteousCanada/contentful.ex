@@ -33,7 +33,7 @@ All request accept an extra parameter for request parameters.
 SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 
-entries = Contentful.Delivery.entries(SPACE_ID, ACCESS_TOKEN)
+{:ok, entries} = Contentful.Delivery.entries(SPACE_ID, ACCESS_TOKEN)
 
 # Printing Content Type ID for every entry
 Enum.each(entries, fn (entry) -> IO.puts(entry.sys.contentType.sys.id) end)
@@ -46,7 +46,7 @@ SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 ENTRY_ID = "my_entry_id"
 
-entry = Contentful.Delivery.entry(SPACE_ID, ACCESS_TOKEN, ENTRY_ID)
+{:ok, entry} = Contentful.Delivery.entry(SPACE_ID, ACCESS_TOKEN, ENTRY_ID)
 ```
 
 * Search Parameters
@@ -59,7 +59,7 @@ SEARCH_PARAMS = %{
   "content_type" => "cat"
 }
 
-entries = Contentful.Delivery.entries(SPACE_ID, ACCESS_TOKEN, SEARCH_PARAMS)
+{:ok, entries} = Contentful.Delivery.entries(SPACE_ID, ACCESS_TOKEN, SEARCH_PARAMS)
 ```
 
 ### Assets
@@ -70,7 +70,7 @@ entries = Contentful.Delivery.entries(SPACE_ID, ACCESS_TOKEN, SEARCH_PARAMS)
 SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 
-assets = Contentful.Delivery.assets(SPACE_ID, ACCESS_TOKEN)
+{:ok, assets} = Contentful.Delivery.assets(SPACE_ID, ACCESS_TOKEN)
 ```
 
 * Single Asset:
@@ -80,7 +80,7 @@ SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 ASSET_ID = "my_asset_id"
 
-asset = Contentful.Delivery.asset(SPACE_ID, ACCESS_TOKEN, ASSET_ID)
+{:ok, asset} = Contentful.Delivery.asset(SPACE_ID, ACCESS_TOKEN, ASSET_ID)
 ```
 
 ### Content Types
@@ -91,7 +91,7 @@ asset = Contentful.Delivery.asset(SPACE_ID, ACCESS_TOKEN, ASSET_ID)
 SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 
-content_types = Contentful.Delivery.content_types(SPACE_ID, ACCESS_TOKEN)
+{:ok, content_types} = Contentful.Delivery.content_types(SPACE_ID, ACCESS_TOKEN)
 ```
 
 * Single Content Type:
@@ -101,7 +101,7 @@ SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 CONTENT_TYPE_ID = "my_content_type_id"
 
-content_type = Contentful.Delivery.content_type(SPACE_ID, ACCESS_TOKEN, CONTENT_TYPE_ID)
+{:ok, content_type} = Contentful.Delivery.content_type(SPACE_ID, ACCESS_TOKEN, CONTENT_TYPE_ID)
 ```
 
 ### Space
@@ -110,7 +110,7 @@ content_type = Contentful.Delivery.content_type(SPACE_ID, ACCESS_TOKEN, CONTENT_
 SPACE_ID = "my_space_id"
 ACCESS_TOKEN = "my_access_token"
 
-space = Contentful.Delivery.space(SPACE_ID, ACCESS_TOKEN)
+{:ok, space} = Contentful.Delivery.space(SPACE_ID, ACCESS_TOKEN)
 ```
 
 ## Contributing
