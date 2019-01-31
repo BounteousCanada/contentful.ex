@@ -40,7 +40,7 @@ defmodule Contentful.IncludeResolverTest do
   @tag timeout: 10000
   test "entry" do
     use_cassette "entry" do
-      entry =
+      {:ok, entry} =
         Delivery.entry(@space_id, @access_token, "5JQ715oDQW68k8EiEuKOk8", %{
           :resolve_includes => true
         })

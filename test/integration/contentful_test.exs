@@ -58,7 +58,7 @@ defmodule Contentful.DeliveryTest do
   @tag timeout: 10000
   test "entry" do
     use_cassette "entry" do
-      entry = Delivery.entry(@space_id, @access_token, "5JQ715oDQW68k8EiEuKOk8")
+      {:ok, entry} = Delivery.entry(@space_id, @access_token, "5JQ715oDQW68k8EiEuKOk8")
 
       assert is_map(entry.fields)
     end

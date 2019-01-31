@@ -34,7 +34,7 @@ defmodule Contentful.Delivery do
   def entry(space_id, access_token, entry_id, params \\ %{}) do
     with {:ok, %{:items => [first | _]}} <-
            entries(space_id, access_token, Map.merge(params, %{:'sys.id' => entry_id})) do
-      first
+      {:ok, first}
     else
       error -> error
     end
