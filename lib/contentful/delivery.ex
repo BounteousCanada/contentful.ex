@@ -89,7 +89,9 @@ defmodule Contentful.Delivery do
   defp contentful_request(uri, access_token, params \\ %{}) do
     final_url = format_path(path: uri, params: params)
 
-    Logger.debug("GET #{final_url}")
+    Logger.debug(fn ->
+      "GET #{final_url}"
+    end)
 
     case get(final_url, client_headers(access_token)) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->

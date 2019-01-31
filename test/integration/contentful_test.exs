@@ -11,7 +11,7 @@ defmodule Contentful.DeliveryTest do
   end
 
   describe ".entries" do
-    @tag timeout: 10000
+    @tag timeout: 10_000
     test "fetches entries successfully with valid space_id & access_token" do
       use_cassette "entries" do
         assert {:ok,
@@ -39,7 +39,7 @@ defmodule Contentful.DeliveryTest do
     end
   end
 
-  @tag timeout: 10000
+  @tag timeout: 10_000
   test "search entry with includes" do
     use_cassette "single_entry_with_includes" do
       space_id = "if4k9hkjacuz"
@@ -55,7 +55,7 @@ defmodule Contentful.DeliveryTest do
     end
   end
 
-  @tag timeout: 10000
+  @tag timeout: 10_000
   test "entry" do
     use_cassette "entry" do
       {:ok, entry} = Delivery.entry(@space_id, @access_token, "5JQ715oDQW68k8EiEuKOk8")

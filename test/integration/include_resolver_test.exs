@@ -10,7 +10,7 @@ defmodule Contentful.IncludeResolverTest do
     HTTPoison.start()
   end
 
-  @tag timeout: 10000
+  @tag timeout: 10_000
   test "entries" do
     use_cassette "entries" do
       {:ok, entries} = Delivery.entries(@space_id, @access_token, %{:resolve_includes => true})
@@ -19,7 +19,7 @@ defmodule Contentful.IncludeResolverTest do
     end
   end
 
-  @tag timeout: 10000
+  @tag timeout: 10_000
   test "search entry with includes" do
     use_cassette "single_entry_with_includes" do
       space_id = "if4k9hkjacuz"
@@ -36,7 +36,7 @@ defmodule Contentful.IncludeResolverTest do
     end
   end
 
-  @tag timeout: 10000
+  @tag timeout: 10_000
   test "entry" do
     use_cassette "entry" do
       {:ok, entry} =
