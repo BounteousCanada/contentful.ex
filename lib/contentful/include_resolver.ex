@@ -13,14 +13,15 @@ defmodule Contentful.IncludeResolver do
         |> Enum.map(fn entry ->
           resolve_include_field(entry, merge_includes(includes))
         end)
-        |> (&(Map.put(entries, :items, &1))).()
+        |> (&Map.put(entries, :items, &1)).()
 
       %{item: item, includes: includes} ->
         item
         |> resolve_include_field(merge_includes(includes))
-        |> (&(Map.put(entries, :item, &1))).()
+        |> (&Map.put(entries, :item, &1)).()
 
-      entries -> entries
+      entries ->
+        entries
     end
   end
 
@@ -28,6 +29,7 @@ defmodule Contentful.IncludeResolver do
     case includes do
       nil ->
         []
+
       _ ->
         Enum.concat(
           Map.get(includes, :Asset, []),
@@ -44,7 +46,7 @@ defmodule Contentful.IncludeResolver do
 
   defp resolve_include_field(field, includes) when is_map(field) do
     field
-    |> Map.keys
+    |> Map.keys()
     |> Enum.map(fn key ->
       {key, replace_field(field[key], includes)}
     end)
@@ -71,5 +73,4 @@ defmodule Contentful.IncludeResolver do
   defp replace_field(field, includes) do
     resolve_include_field(field, includes)
   end
-
 end

@@ -24,7 +24,7 @@ defmodule Contentful.IncludeResolverTest do
     use_cassette "single_entry_with_includes" do
       space_id = "if4k9hkjacuz"
 
-      {:ok, entries}  =
+      {:ok, entries} =
         Delivery.entries(space_id, @access_token, %{
           "content_type" => "6pFEhaSgDKimyOCE0AKuqe",
           "fields.slug" => "test-page",

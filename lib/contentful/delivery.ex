@@ -33,7 +33,7 @@ defmodule Contentful.Delivery do
 
   def entry(space_id, access_token, entry_id, params \\ %{}) do
     with {:ok, %{:items => [first | _]}} <-
-           entries(space_id, access_token, Map.merge(params, %{:'sys.id' => entry_id})) do
+           entries(space_id, access_token, Map.merge(params, %{:"sys.id" => entry_id})) do
       {:ok, first}
     else
       error -> error
@@ -133,6 +133,6 @@ defmodule Contentful.Delivery do
 
   defp process_response_body(body) do
     body
-    |> Poison.decode!([keys: :atoms])
+    |> Poison.decode!(keys: :atoms)
   end
 end
