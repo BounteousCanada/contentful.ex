@@ -24,7 +24,7 @@ defmodule Contentful.Delivery do
     entries_url = "/spaces/#{space_id}/entries"
 
     with {:ok, body} <-
-           contentful_request(entries_url, access_token, Map.delete(params, "resolve_includes")) do
+           contentful_request(entries_url, access_token, Map.delete(params, :resolve_includes)) do
       parse_entries(body, params)
     else
       error -> error
@@ -32,8 +32,8 @@ defmodule Contentful.Delivery do
   end
 
   def entry(space_id, access_token, entry_id, params \\ %{}) do
-    with {:ok, %{"items" => [first | _]}} <-
-           entries(space_id, access_token, Map.merge(params, %{'sys.id' => entry_id})) do
+    with {:ok, %{:items => [first | _]}} <-
+           entries(space_id, access_token, Map.merge(params, %{:'sys.id' => entry_id})) do
       first
     else
       error -> error
@@ -80,7 +80,7 @@ defmodule Contentful.Delivery do
     )
   end
 
-  defp parse_entries(body, %{"resolve_includes" => _}) do
+  defp parse_entries(body, %{:resolve_includes => _}) do
     {:ok, Contentful.IncludeResolver.resolve_entry(body)}
   end
 
@@ -133,6 +133,6 @@ defmodule Contentful.Delivery do
 
   defp process_response_body(body) do
     body
-    |> Poison.decode!()
+    |> Poison.decode!([keys: :atoms])
   end
 end

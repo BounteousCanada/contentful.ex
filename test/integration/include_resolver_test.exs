@@ -14,9 +14,9 @@ defmodule Contentful.IncludeResolverTest do
   @tag timeout: 10000
   test "entries" do
     use_cassette "entries" do
-      entries = Delivery.entries(@space_id, @access_token, %{"resolve_includes" => true})
+      {:ok, entries} = Delivery.entries(@space_id, @access_token, %{:resolve_includes => true})
 
-      assert is_list(entries)
+      assert is_list(entries.items)
     end
   end
 
@@ -25,15 +25,15 @@ defmodule Contentful.IncludeResolverTest do
     use_cassette "single_entry_with_includes" do
       space_id = "if4k9hkjacuz"
 
-      entries =
+      {:ok, entries}  =
         Delivery.entries(space_id, @access_token, %{
           "content_type" => "6pFEhaSgDKimyOCE0AKuqe",
           "fields.slug" => "test-page",
           "include" => "10",
-          "resolve_includes" => true
+          :resolve_includes => true
         })
 
-      assert is_list(entries)
+      assert is_list(entries.items)
     end
   end
 
@@ -42,7 +42,7 @@ defmodule Contentful.IncludeResolverTest do
     use_cassette "entry" do
       entry =
         Delivery.entry(@space_id, @access_token, "5JQ715oDQW68k8EiEuKOk8", %{
-          "resolve_includes" => true
+          :resolve_includes => true
         })
 
       assert is_map(entry)
