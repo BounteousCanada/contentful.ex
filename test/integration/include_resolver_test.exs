@@ -1,7 +1,6 @@
 defmodule Contentful.IncludeResolverTest do
   use ExUnit.Case
   alias Contentful.Delivery
-  alias Contentful.IncludeResolver
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   @access_token "ACCESS_TOKEN"
