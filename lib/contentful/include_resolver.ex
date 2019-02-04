@@ -55,7 +55,7 @@ defmodule Contentful.IncludeResolver do
   defp replace_field(field, includes) when is_map(field) do
     case field[:sys] do
       %{type: "Link", linkType: link_type}
-      when link_type in [:Asset, :Entry] ->
+      when link_type in ["Asset", "Entry"] ->
         includes
         |> Enum.find(fn match ->
           match.sys.id == field.sys.id
