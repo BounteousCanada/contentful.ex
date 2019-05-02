@@ -135,6 +135,6 @@ defmodule Contentful.Delivery do
 
   defp process_response_body(body) do
     body
-    |> Poison.decode!(keys: :atoms)
+    |> Jason.decode!(keys: :atoms)
   end
 end
