@@ -8,7 +8,8 @@ defmodule Contentful.Delivery do
   require Logger
   use HTTPoison.Base
 
-  @endpoint "cdn.contentful.com"
+  @delivery_endpoint "cdn.contentful.com"
+  @preview_endpoint "preview.contentful.com"
   @protocol "https"
 
   def space(space_id, access_token) do
@@ -117,20 +118,27 @@ defmodule Contentful.Delivery do
   end
 
   defp format_path(path: path, params: params) do
-    if Enum.any?(params) do
+    if Enum.any?(Map.delete(params, :preview)) do
       query =
-        params
+        Map.delete(params, :preview)
         |> Enum.reduce("", fn {k, v}, acc -> acc <> "#{k}=#{v}&" end)
         |> String.trim_trailing()
-
-      "#{path}/?#{query}"
+      if get_in(params, [:preview]) do
+        "#{@preview_endpoint}#{path}/?#{query}"
+        else
+        "#{@delivery_endpoint}#{path}/?#{query}"
+      end
     else
-      path
+      if get_in(params, [:preview]) do
+        "#{@preview_endpoint}/#{path}"
+      else
+        "#{@delivery_endpoint}/#{path}"
+      end
     end
   end
 
   defp process_url(url) do
-    "#{@protocol}://#{@endpoint}#{url}"
+    "#{@protocol}://#{url}"
   end
 
   defp process_response_body(body) do
